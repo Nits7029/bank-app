@@ -1,12 +1,20 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes';
+import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE, FETCH_CITY } from '../constants/actionTypes';
 
 import * as api from '../api/index.js';
 
-export const getPosts = () => async (dispatch) => {
+export const getPosts = (filter, page, limit) => async (dispatch) => {
   try {
-    const { data } = await api.fetchPosts();
-
+    const { data } = await api.fetchPosts({ filter, page, limit });
     dispatch({ type: FETCH_ALL, payload: data });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const getCities = () => async (dispatch) => {
+  try {
+    const { data } = await api.fetchCities();
+    dispatch({ type: FETCH_CITY, payload: data });
   } catch (error) {
     console.log(error.message);
   }

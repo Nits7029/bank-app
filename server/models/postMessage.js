@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import mongoosePaginate from "mongoose-paginate"
 
 const postSchema = mongoose.Schema({
     clientName: String,
@@ -17,6 +18,7 @@ const postSchema = mongoose.Schema({
     },
 })
 
-var PostMessage = mongoose.model('PostMessage', postSchema);
+postSchema.plugin(mongoosePaginate)
+const PostMessage = mongoose.model('PostMessage', postSchema);
 
 export default PostMessage;
